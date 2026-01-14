@@ -1,0 +1,1130 @@
+/* ============================================
+   NotebookLM101 - 新潮波普风 (Modern Pop Art)
+   孟菲斯 + 报刊拼贴风格
+   ============================================ */
+
+/* ============================================
+   CSS 变量 - 波普风配色
+   ============================================ */
+:root {
+    /* 主色调 - 高饱和度 */
+    --color-pop-yellow: #FFD93D;
+    --color-pop-pink: #FF6B9D;
+    --color-pop-blue: #4ECDC4;
+    --color-pop-purple: #A855F7;
+    --color-pop-red: #FF6B6B;
+    --color-pop-orange: #FF8C42;
+    --color-pop-green: #95E1D3;
+
+    /* 中性色 */
+    --color-black: #1a1a1a;
+    --color-white: #ffffff;
+    --color-cream: #FFF8E7;
+    --color-gray: #6B7280;
+
+    /* 波普风边框 */
+    --border-thick: 4px solid var(--color-black);
+    --border-thin: 2px solid var(--color-black);
+    --border-dotted: 3px dotted var(--color-black);
+
+    /* 波普风阴影 - 硬阴影，无模糊 */
+    --shadow-hard: 6px 6px 0px var(--color-black);
+    --shadow-hard-sm: 4px 4px 0px var(--color-black);
+    --shadow-hard-lg: 10px 10px 0px var(--color-black);
+
+    /* 字体 */
+    --font-family-heading: 'Impact', 'Arial Black', sans-serif;
+    --font-family-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-mono: 'Courier New', monospace;
+
+    /* 间距 */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    /* 圆角 */
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+
+    /* 过渡 */
+    --transition-fast: 0.1s ease;
+    --transition-base: 0.2s ease;
+}
+
+/* ============================================
+   基础重置
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family-body);
+    line-height: 1.6;
+    color: var(--color-black);
+    background-color: var(--color-cream);
+    background-image:
+        radial-gradient(circle, var(--color-pop-yellow) 2px, transparent 2px),
+        radial-gradient(circle, var(--color-pop-pink) 2px, transparent 2px);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ============================================
+   通用组件
+   ============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* 波普风标题 */
+.section-title {
+    font-family: var(--font-family-heading);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-black);
+    text-shadow: 3px 3px 0px var(--color-pop-yellow);
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-pop-pink) 0px,
+        var(--color-pop-pink) 20px,
+        var(--color-black) 20px,
+        var(--color-black) 22px
+    );
+}
+
+.section-title .emoji {
+    font-size: 0.8em;
+}
+
+/* 波普方框卡片 */
+.pop-box {
+    background: var(--color-white);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    transition: all var(--transition-base);
+}
+
+.pop-box:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px var(--color-black);
+}
+
+/* 波普标签 */
+.pop-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--color-pop-yellow);
+    border: var(--border-thin);
+    font-family: var(--font-family-mono);
+    font-weight: bold;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-hard-sm);
+}
+
+/* ============================================
+   进度条
+   ============================================ */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 6px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color-pop-yellow),
+        var(--color-pop-yellow) 10px,
+        var(--color-pop-pink) 10px,
+        var(--color-pop-pink) 20px,
+        var(--color-pop-blue) 20px,
+        var(--color-pop-blue) 30px
+    );
+    z-index: 1000;
+    border-bottom: var(--border-thin);
+    transition: width var(--transition-base);
+}
+
+/* ============================================
+   目录导航按钮（FAB）- 所有设备显示
+   ============================================ */
+.fab {
+    position: fixed;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 64px;
+    height: 64px;
+    background: var(--color-pop-pink);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+}
+
+.fab:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px var(--color-black);
+    background: var(--color-pop-purple);
+}
+
+.fab:active {
+    transform: translate(0, 0);
+    box-shadow: var(--shadow-hard);
+}
+
+.fab-icon {
+    font-size: 1.75rem;
+    color: var(--color-black);
+}
+
+/* ============================================
+   移动端导航抽屉
+   ============================================ */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: var(--color-pop-yellow);
+    border-right: var(--border-thick);
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0,0,0,0.05) 10px,
+        rgba(0,0,0,0.05) 20px
+    );
+}
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: var(--border-thick);
+    font-family: var(--font-family-heading);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    background: var(--color-pop-pink);
+}
+
+.drawer-close {
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-mono);
+    font-weight: bold;
+}
+
+.drawer-nav {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.drawer-link {
+    display: block;
+    padding: var(--spacing-sm);
+    background: var(--color-white);
+    border: var(--border-thin);
+    font-family: var(--font-family-heading);
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-hard-sm);
+}
+
+.drawer-link:hover {
+    background: var(--color-pop-blue);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--color-black);
+}
+
+.drawer-link.active {
+    background: var(--color-black);
+    color: var(--color-pop-yellow);
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 250;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    backdrop-filter: blur(2px);
+}
+
+.drawer-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   Hero 区 - 报刊头条风格
+   ============================================ */
+.hero {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    background: var(--color-pop-yellow);
+    border-bottom: var(--border-thick);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 40px,
+        rgba(0,0,0,0.03) 40px,
+        rgba(0,0,0,0.03) 42px
+    );
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-family: var(--font-family-heading);
+    font-size: clamp(3rem, 10vw, 6rem);
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-black);
+    text-shadow:
+        6px 6px 0px var(--color-pop-pink),
+        -3px -3px 0px var(--color-pop-blue);
+    letter-spacing: -2px;
+    transform: rotate(-2deg);
+}
+
+.hero-subtitle {
+    font-family: var(--font-family-mono);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    background: var(--color-black);
+    color: var(--color-pop-yellow);
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transform: rotate(1deg);
+}
+
+.hero-desc {
+    font-size: 1.25rem;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+/* 波普风按钮 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    border: var(--border-thick);
+    font-family: var(--font-family-heading);
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-hard);
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px var(--color-black);
+}
+
+.btn:active {
+    transform: translate(0, 0);
+    box-shadow: 3px 3px 0px var(--color-black);
+}
+
+.btn-primary {
+    background: var(--color-pop-pink);
+    color: var(--color-black);
+}
+
+.btn-secondary {
+    background: var(--color-pop-blue);
+    color: var(--color-black);
+}
+
+.btn-large {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.375rem;
+}
+
+.btn-yellow {
+    background: var(--color-pop-yellow);
+    color: var(--color-black);
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   快速入门 - 漫画对话气泡风格
+   ============================================ */
+.quick-start {
+    padding: var(--spacing-lg) 0;
+    background: var(--color-pop-blue);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.quick-start-box {
+    background: var(--color-white);
+    border: var(--border-thick);
+    padding: var(--spacing-lg);
+    text-align: center;
+    box-shadow: var(--shadow-hard-lg);
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quick-start-box::before {
+    content: 'BREAKING!';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-pop-red);
+    color: var(--color-white);
+    padding: 0.5rem 1.5rem;
+    font-family: var(--font-family-heading);
+    font-size: 1.25rem;
+    border: var(--border-thin);
+    box-shadow: var(--shadow-hard-sm);
+    text-transform: uppercase;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+.quick-start-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.quick-start-title {
+    font-family: var(--font-family-heading);
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.quick-start-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* ============================================
+   核心功能 - 漫画格风格
+   ============================================ */
+.features {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-pop-purple);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.feature-card {
+    background: var(--color-white);
+    border: var(--border-thick);
+    padding: var(--spacing-md);
+    text-align: center;
+    box-shadow: var(--shadow-hard);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: var(--border-dotted);
+    pointer-events: none;
+}
+
+.feature-card:hover {
+    transform: translate(-5px, -5px) rotate(-1deg);
+    box-shadow: 11px 11px 0px var(--color-black);
+}
+
+.feature-card:nth-child(1):hover { background: var(--color-pop-yellow); }
+.feature-card:nth-child(2):hover { background: var(--color-pop-pink); }
+.feature-card:nth-child(3):hover { background: var(--color-pop-blue); }
+.feature-card:nth-child(4):hover { background: var(--color-pop-green); }
+
+.feature-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-title {
+    font-family: var(--font-family-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.feature-desc {
+    font-size: 1rem;
+    color: var(--color-black);
+    line-height: 1.6;
+}
+
+.new-features {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--color-black);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--color-pop-red);
+    color: var(--color-white);
+    font-family: var(--font-family-heading);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+    border: var(--border-thin);
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.new-features p {
+    color: var(--color-white);
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   用户画像 - 报刊专栏风格
+   ============================================ */
+.users {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-pop-orange);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.user-card {
+    background: var(--color-white);
+    border: var(--border-thick);
+    padding: var(--spacing-md);
+    text-align: center;
+    box-shadow: var(--shadow-hard);
+    transition: all var(--transition-base);
+}
+
+.user-card:hover {
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.user-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    background: var(--color-pop-yellow);
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border: var(--border-thin);
+}
+
+.user-title {
+    font-family: var(--font-family-heading);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.user-desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* ============================================
+   谁不适合 - 警告风格
+   ============================================ */
+.not-suitable {
+    padding: var(--spacing-lg) 0;
+    background: var(--color-pop-red);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.not-suitable-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.not-suitable-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    background: var(--color-white);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+}
+
+.cross-icon {
+    color: var(--color-pop-red);
+    font-size: 2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    font-family: var(--font-family-heading);
+}
+
+/* ============================================
+   用户评价 - 报纸报道风格
+   ============================================ */
+.reviews {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-cream);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.review-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.review-section-title {
+    font-family: var(--font-family-heading);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.review-list {
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+.review-item {
+    background: var(--color-white);
+    border: var(--border-thin);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-hard-sm);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.review-section.positive .review-item {
+    border-left: 8px solid var(--color-pop-green);
+}
+
+.review-section.negative .review-item {
+    border-left: 8px solid var(--color-pop-orange);
+}
+
+.review-quotes {
+    display: grid;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.quote {
+    font-family: var(--font-family-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--color-pop-yellow);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
+    position: relative;
+}
+
+.quote::before {
+    content: '"';
+    font-size: 4rem;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+}
+
+/* ============================================
+   FAQ 手风琴 - 报纸折叠风格
+   ============================================ */
+.faq {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-pop-green);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.faq-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--color-white);
+    border: var(--border-thick);
+    margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-hard);
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--transition-fast);
+    background: var(--color-pop-yellow);
+}
+
+.faq-header:hover {
+    background: var(--color-pop-blue);
+}
+
+.faq-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.faq-title {
+    flex: 1;
+    font-family: var(--font-family-heading);
+    font-size: 1.125rem;
+    text-transform: uppercase;
+}
+
+.faq-arrow {
+    font-size: 1.5rem;
+    transition: transform var(--transition-base);
+}
+
+.faq-item.expanded .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-base);
+    background: var(--color-white);
+}
+
+.faq-item.expanded .faq-content {
+    max-height: 600px;
+}
+
+.faq-content p {
+    padding: var(--spacing-md);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ============================================
+   竞品对比 - 报纸表格风格
+   ============================================ */
+.compare {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-pop-blue);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.compare-card {
+    background: var(--color-white);
+    border: var(--border-thick);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.compare-title {
+    font-family: var(--font-family-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    text-align: center;
+    background: var(--color-black);
+    color: var(--color-pop-yellow);
+    padding: var(--spacing-sm);
+    border: var(--border-thin);
+}
+
+.compare-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.compare-item {
+    padding: var(--spacing-sm);
+    font-size: 1rem;
+    font-family: var(--font-family-mono);
+    border: var(--border-dotted);
+}
+
+.compare-item.positive {
+    background: var(--color-pop-green);
+}
+
+.compare-item.negative {
+    background: var(--color-pop-red);
+}
+
+.compare-summary {
+    text-align: center;
+    font-family: var(--font-family-heading);
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    padding: var(--spacing-sm);
+    background: var(--color-pop-pink);
+    border: var(--border-thin);
+}
+
+/* ============================================
+   立即开始
+   ============================================ */
+.get-started {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-pop-yellow);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+}
+
+.get-started-box {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--color-white);
+    border: var(--border-thick);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.get-started-info {
+    display: grid;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-cream);
+    border: var(--border-thin);
+    box-shadow: var(--shadow-hard-sm);
+}
+
+.info-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.get-started-cta {
+    text-align: center;
+}
+
+/* ============================================
+   底部 CTA - 漫画爆炸框风格
+   ============================================ */
+.final-cta {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-black);
+    border-top: var(--border-thick);
+    position: relative;
+    overflow: hidden;
+}
+
+.final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-radial-gradient(
+        circle at 20% 50%,
+        var(--color-pop-pink) 0px,
+        var(--color-pop-pink) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    opacity: 0.3;
+}
+
+.final-cta-content {
+    position: relative;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.final-cta-title {
+    font-family: var(--font-family-heading);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-pop-yellow);
+    text-shadow:
+        4px 4px 0px var(--color-pop-pink),
+        -2px -2px 0px var(--color-pop-blue);
+    letter-spacing: 3px;
+}
+
+.final-cta-desc {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+.final-cta .btn-primary {
+    background: var(--color-pop-yellow);
+    color: var(--color-black);
+}
+
+.final-cta .btn-primary:hover {
+    background: var(--color-pop-pink);
+}
+
+/* ============================================
+   页脚
+   ============================================ */
+footer {
+    padding: var(--spacing-lg) 0;
+    background: var(--color-black);
+    color: var(--color-white);
+    text-align: center;
+    border-top: var(--border-thick);
+}
+
+footer p {
+    font-family: var(--font-family-mono);
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+    }
+
+    .features-grid,
+    .users-grid,
+    .compare-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .final-cta-title {
+        font-size: 1.75rem;
+    }
+
+    .quick-start-box::before {
+        font-size: 1rem;
+        padding: 0.35rem 1rem;
+    }
+}
+
+/* ============================================
+   动画效果
+   ============================================ */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 页面加载动画 */
+main > section {
+    animation: slideIn 0.5s ease-out backwards;
+}
+
+main > section:nth-child(1) { animation-delay: 0.1s; }
+main > section:nth-child(2) { animation-delay: 0.2s; }
+main > section:nth-child(3) { animation-delay: 0.3s; }
+main > section:nth-child(4) { animation-delay: 0.4s; }
+main > section:nth-child(5) { animation-delay: 0.5s; }
+main > section:nth-child(6) { animation-delay: 0.6s; }
+main > section:nth-child(7) { animation-delay: 0.7s; }
+main > section:nth-child(8) { animation-delay: 0.8s; }
+main > section:nth-child(9) { animation-delay: 0.9s; }
+main > section:nth-child(10) { animation-delay: 1s; }

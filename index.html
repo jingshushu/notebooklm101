@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NotebookLM101 - 全面了解 Google NotebookLM，AI 驱动的个人研究与笔记助理。支持 PDF、YouTube、录音等多种资料来源，自动生成 AI 播客、教学视频、摘要、思维导图等多模态输出。">
+    <meta name="keywords" content="NotebookLM,Google NotebookLM,AI笔记,AI助理,AI播客,Audio Overview,Video Overview,AI学习工具,文献综述,会议记录整理,学习复习,知识管理">
+    <meta name="author" content="NotebookLM101">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="NotebookLM101 - AI 驱动的第二大脑，最接近第二大脑的免费 AI 工具">
+    <meta property="og:description" content="Google NotebookLM 全攻略：AI 驱动的个人研究与笔记助理，只基于你上传的资料回答，幻觉极少，引用可追溯。支持 Audio Overview AI 播客、Video Overview 教学视频。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://notebooklm.google.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NotebookLM101 - AI 驱动的第二大脑">
+    <meta name="twitter:description" content="Google 推出的 AI 笔记助理，支持 PDF、YouTube、录音等多种资料，自动生成 AI 播客和教学视频。">
+    <link rel="canonical" href="https://notebooklm.google.com">
+    <title>NotebookLM101 - Google NotebookLM 全攻略 | AI 驱动的第二大脑 | Audio Overview AI 播客 | Video Overview 教学视频</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 阅读进度条 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- 目录导航按钮（点击展开） -->
+    <button class="fab" id="fab" aria-label="打开目录">
+        <span class="fab-icon">☰</span>
+    </button>
+
+    <!-- 移动端导航抽屉 -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <span>目录</span>
+            <button class="drawer-close" id="drawerClose">×</button>
+        </div>
+        <nav class="drawer-nav" id="drawerNav"></nav>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <main>
+        <!-- 1. Hero 区 -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">NotebookLM101</h1>
+                    <p class="hero-subtitle">目前最接近第二大脑的免费 AI 工具</p>
+                    <p class="hero-desc">
+                        Google 推出的 AI 驱动个人研究与笔记助理，几乎只基于你自己上传的资料来回答，幻觉极少，引用可追溯。
+                        特别适合论文阅读、项目研究、会议记录整理、学习复习等场景。
+                    </p>
+                    <div class="hero-cta">
+                        <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-primary">前往试用 →</a>
+                        <a href="#quick-start" class="btn btn-secondary">快速入门</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 快速入门 -->
+        <section class="quick-start" id="quick-start">
+            <div class="container">
+                <div class="quick-start-box">
+                    <span class="quick-start-icon">⚡</span>
+                    <h2 class="quick-start-title">30秒感受到震撼</h2>
+                    <p class="quick-start-text">
+                        随便找一份 20～60 页的 PDF（论文、报告、课程讲义都行）丢进去 → 点「Audio Overview」或「Video Overview」→ 听/看 8～15 分钟 → 基本就会被圈粉 😂
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. NotebookLM 是什么 -->
+        <section class="features" id="intro">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">💡</span> NotebookLM 是什么？</h2>
+                <div class="pop-box" style="padding: 2rem; margin-bottom: 2rem;">
+                    <p style="font-size: 1.125rem; line-height: 1.8;">
+                        <strong>NotebookLM</strong> 是 Google 推出的一款 AI 驱动的个人研究与笔记助理（2026年1月最新状态）。
+                        它跟 ChatGPT、Gemini、Claude 等通用大模型最大的区别在于：<strong>NotebookLM 几乎只基于你自己上传的资料来回答和生成内容</strong>，
+                        不会随便从互联网抓取信息，因此<strong>幻觉（乱编）极少</strong>，特别适合需要高度准确、引用可追溯的场景。
+                    </p>
+                </div>
+                <div class="pop-box" style="padding: 2rem;">
+                    <p style="font-size: 1.125rem; line-height: 1.8; text-align: center; font-family: var(--font-family-mono); font-weight: 600;">
+                        「一个专属于你的、只吃你自己资料的超级研究助理，把枯燥的长文/论文/会议记录/视频，快速变成好读的摘要、好听的播客、好看的教学视频，而且引用全部可追溯。」
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 核心功能全景 -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">🚀</span> 核心功能全景（2026年1月最新）</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📚</span>
+                        <h3 class="feature-title">丰富的资料来源</h3>
+                        <p class="feature-desc">支持 PDF、Word、TXT、Google 文档/简报、网页链接、YouTube 视频（自动解析字幕）、录音文件（mp3/wav 自动转录）、图片表格。单个来源上限约50万字。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎙️</span>
+                        <h3 class="feature-title">AI 播客 (Audio Overview)</h3>
+                        <p class="feature-desc">把资料瞬间变成两个AI主持人聊天式的 podcast。对话极其自然有梗，支持互动模式（可随时打断提问），可自定义语气和长度。很多人说："这比自己读文档有趣太多了！"</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎬</span>
+                        <h3 class="feature-title">AI 视频 (Video Overview)</h3>
+                        <p class="feature-desc">2026年重磅升级：自动生成有旁白+幻灯片+图表+动画的教学视频。类似 narrated slides 的视觉化讲解，支持80+种语言，适合做报告和教学。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3 class="feature-title">多模态输出</h3>
+                        <p class="feature-desc">详细摘要、学习指南、思维导图、FAQ 问答集、时间轴、优缺点对比表、报告大纲、闪卡+测验题、完整幻灯片生成等。</p>
+                    </div>
+                </div>
+                <div class="new-features">
+                    <span class="badge">🔥 2026 新功能</span>
+                    <p>互动式播客 • 完整幻灯片生成 • 深度研究模式 • 移动 App 离线听 Audio Overview</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 适合谁用 -->
+        <section class="users" id="users">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">👥</span> 适合谁用？（6 类用户）</h2>
+                <div class="users-grid">
+                    <div class="user-card">
+                        <span class="user-icon">👨‍🎓</span>
+                        <h3 class="user-title">学生 & 考研/考证党</h3>
+                        <p class="user-desc">期末冲刺神器<br>听播客背书超爽<br>使用量最大的群体</p>
+                    </div>
+                    <div class="user-card">
+                        <span class="user-icon">🔬</span>
+                        <h3 class="user-title">研究生 & 研究者</h3>
+                        <p class="user-desc">文献综述利器<br>精准引用来源<br>极低幻觉+超长上下文</p>
+                    </div>
+                    <div class="user-card">
+                        <span class="user-icon">💼</span>
+                        <h3 class="user-title">职场人 & 知识工作者</h3>
+                        <p class="user-desc">汇报效率核武器<br>10小时→15分钟<br>咨询/产品/运营/战略</p>
+                    </div>
+                    <div class="user-card">
+                        <span class="user-icon">🎨</span>
+                        <h3 class="user-title">内容创作者 & 讲师</h3>
+                        <p class="user-desc">快速理解复杂领域<br>Video Overview 自动生成教学视频<br>自媒体必备</p>
+                    </div>
+                    <div class="user-card">
+                        <span class="user-icon">🌍</span>
+                        <h3 class="user-title">外语资料处理者</h3>
+                        <p class="user-desc">外文论文/合同/说明书<br>中文 podcast/摘要<br>理解速度提升几倍</p>
+                    </div>
+                    <div class="user-card">
+                        <span class="user-icon">🧠</span>
+                        <h3 class="user-title">进阶 & 隐私敏感用户</h3>
+                        <p class="user-desc">第二大脑构建者<br>律师/医生/工程师/创业者<br>资料不用于训练模型</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 谁不适合 -->
+        <section class="not-suitable" id="not-suitable">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">❌</span> 谁其实不太适合？</h2>
+                <div class="not-suitable-list">
+                    <div class="not-suitable-item">
+                        <span class="cross-icon">✕</span>
+                        <p>只想随便聊天、写小说、头脑风暴、需要实时联网最新资讯的人 → 更适合用 <strong>ChatGPT/Gemini/Claude/Perplexity</strong></p>
+                    </div>
+                    <div class="not-suitable-item">
+                        <span class="cross-icon">✕</span>
+                        <p>完全不碰「上传资料」这一步，只想用现成知识的人</p>
+                    </div>
+                    <div class="not-suitable-item">
+                        <span class="cross-icon">✕</span>
+                        <p>追求极致排版/专业设计输出的人（NotebookLM 生成的内容更偏「实用结构化」，美观度一般）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 用户评价 -->
+        <section class="reviews" id="reviews">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">💬</span> 用户真实评价（2026年1月）</h2>
+
+                <div class="review-section positive">
+                    <h3 class="review-section-title"><span class="check-icon">✅</span> 最常被吹爆的点（正面评价 80-90%）</h3>
+                    <div class="review-list">
+                        <div class="review-item">
+                            <p><strong>Audio Overview AI 双人播客仍然是王牌</strong> - 几乎所有人第一次用都"震惊""上头""杀疯了"。对话自然到像真人，有笑点、吐槽、抢话、呼吸声，甚至情绪起伏。把枯燥论文/财报/书/会议记录瞬间变"可听有趣的节目"。中文播客质量被夸"98%像真人""太自然了"。</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>极低幻觉 + 所有回答可追溯来源</strong> - "终于有一个AI不乱编了""引用直接跳原文高亮""汇报时底气十足"。这是它甩开 ChatGPT/Gemini/Claude 的最大优势，尤其适合论文、报告、法律/医疗/技术资料。</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>多模态输出效率爆炸</strong> - 摘要→思维导图→FAQ→时间轴→优缺点表→Video Overview（带图表讲解视频）→DataTable（自动转表格）→演示文稿/PPT风格。用户常说："以前做PPT/报告要3天，现在半小时搞定，剩下时间摸鱼"。</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>真正像"第二大脑"/个人知识助理</strong> - 适合深度学习、跨领域速成、文献综述、竞品分析、跨专业理解。很多人感慨："它不是帮你记笔记，是逼你思考""从信息搬运工升级成观点编辑"。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-section negative">
+                    <h3 class="review-section-title"><span class="warning-icon">⚠️</span> 常见的吐槽与不满</h3>
+                    <div class="review-list">
+                        <div class="review-item">
+                            <p><strong>聊天记录不持久</strong>：刷新/关页面就没了，很多人骂"笨拙""打断深度思考"</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>中文播客质量不稳定</strong>："翻译腔"严重，主持人常说"这是个非常好的观点""我完全同意你的看法"，听起来像AI译制片。过于"和谐"/复读机，信息密度低。</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>Pro版门槛</strong>：免费版每天限额（约50次聊天、3次Audio/Video生成），重度用户抓狂</p>
+                        </div>
+                        <div class="review-item">
+                            <p><strong>界面细节欠打磨</strong>：窗口大小、按钮位置、文件夹/标签管理等小功能待优化</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-quotes">
+                    <div class="quote">"NotebookLM 让我三个月没手动做笔记了"</div>
+                    <div class="quote">"职场牛马效率核武器"</div>
+                    <div class="quote">"AI 学习工具天花板，没有之一"</div>
+                    <div class="quote">"改变了人类吸收知识的方式"</div>
+                    <div class="quote">"NotebookLM 是 2026 年最被低估的生产力核弹"</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 常见问题 -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">❓</span> 常见问题 FAQ</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon">📊</span>
+                            <span class="faq-title">使用限制与配额问题</span>
+                            <span class="faq-arrow">▼</span>
+                        </div>
+                        <div class="faq-content">
+                            <p>免费版每天聊天查询限额约 50 次、Audio/Video Overview 生成次数每天约 3 次。一个笔记本最多 50 个来源，每个来源上限约 50 万字/200MB。超过限制需要删除旧源、开新笔记本，或升级 Pro/Plus 版。重度研究/拆书党常说："刚用上瘾就撞墙了，太抠门"。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon">🎙️</span>
+                            <span class="faq-title">中文播客质量如何？</span>
+                            <span class="faq-arrow">▼</span>
+                        </div>
+                        <div class="faq-content">
+                            <p>2026 年已大幅优化，98% 像真人，偶有"翻译腔"。但仍存在一些问题：主持人过于"和谐"/复读机，互相高帽、重复确认，信息密度低；复杂中文指令可能有提示词漂移；语体断层，口语开场后突然切教科书式书面语。英文播客自然爆表，中文还在持续优化中。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon">⚠️</span>
+                            <span class="faq-title">功能/体验小 bug 与细节问题</span>
+                            <span class="faq-arrow">▼</span>
+                        </div>
+                        <div class="faq-content">
+                            <p>• 聊天记录不持久：刷新/关页面就丢失<br>
+                            • 界面细节：窗口大小、按钮位置、复制时带多余编号、缺少文件夹/标签管理<br>
+                            • 生成不一致：同一资料不同时间问，答案质量天差地别（RAG检索上下文不稳）<br>
+                            • 上传失败原因：文件超200MB、PDF有拷贝保护、来源超字数、DRM保护Kindle书等</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon">🔐</span>
+                            <span class="faq-title">隐私、安全与访问问题</span>
+                            <span class="faq-arrow">▼</span>
+                        </div>
+                        <div class="faq-content">
+                            <p>• <strong>隐私</strong>：资料不用于训练模型，Google 承诺不泄露。虽然这是 Google 的，但资料只用于你的 notebook，不像通用聊天会长期存档。<br>
+                            • <strong>年龄验证</strong>：必须18岁+年龄验证（未验证或工作/学校账户常被挡）<br>
+                            • <strong>网络访问</strong>：部分地区需科学上网，国内用户最常遇到<br>
+                            • <strong>企业账户</strong>：公司/学校账户需管理员开启额外服务</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <span class="faq-icon">💡</span>
+                            <span class="faq-title">与 ChatGPT/Claude/Gemini 的区别</span>
+                            <span class="faq-arrow">▼</span>
+                        </div>
+                        <div class="faq-content">
+                            <p><strong>核心区别</strong>：NotebookLM 是"专吃你自己资料的超精准研究助理 + 多模态输出工厂"，它几乎不联网、不乱编、一切回答都强制可追溯来源。<br><br>
+                            <strong>想"随便聊、要最新资讯、写小说、脑暴"</strong> → 用 ChatGPT/Claude/Gemini/Perplexity<br>
+                            <strong>想"啃大块复杂自家资料、追求零幻觉 + 可追溯 + 神奇多模态输出（播客/视频/幻灯片）"</strong> → NotebookLM 目前无敌<br><br>
+                            <strong>2026 年最强组合（社区共识）</strong>：NotebookLM（消化+生成） + Obsidian/Notion（长期存储+自定义） + Gemini/ChatGPT（创意/联网补充）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 竞品对比 -->
+        <section class="compare" id="compare">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">🆚</span> NotebookLM vs 其他工具</h2>
+
+                <h3 style="text-align: center; font-family: var(--font-family-heading); font-size: 1.75rem; margin: 2rem 0; text-transform: uppercase;">vs 通用大模型 AI</h3>
+                <div class="compare-grid">
+                    <div class="compare-card">
+                        <h4 class="compare-title">NotebookLM 优势</h4>
+                        <div class="compare-list">
+                            <div class="compare-item positive">✅ 知识来源：只用你上传的资料，强制 grounding</div>
+                            <div class="compare-item positive">✅ 幻觉率：极低（几乎为0），所有回答可点击跳原文</div>
+                            <div class="compare-item positive">✅ 隐私：资料不用于训练，承诺不泄露</div>
+                            <div class="compare-item positive">✅ 独特输出：Audio Overview、Video Overview、Slide Deck、Data Table</div>
+                            <div class="compare-item positive">✅ 免费度：个人版完全免费（限额），Pro 很便宜</div>
+                        </div>
+                    </div>
+                    <div class="compare-card">
+                        <h4 class="compare-title">ChatGPT/Claude/Gemini 优势</h4>
+                        <div class="compare-list">
+                            <div class="compare-item positive">✅ 实时联网/最新资讯（Perplexity 最强）</div>
+                            <div class="compare-item positive">✅ 创意写作、代码生成、头脑风暴更强</div>
+                            <div class="compare-item positive">✅ 对话体验更自然、更智能</div>
+                            <div class="compare-item positive">✅ 通用场景更广</div>
+                        </div>
+                        <p class="compare-summary" style="margin-top: 1rem;">两者互补使用最强！</p>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; font-family: var(--font-family-heading); font-size: 1.75rem; margin: 3rem 0 2rem; text-transform: uppercase;">vs 传统笔记工具</h3>
+                <div class="compare-grid">
+                    <div class="compare-card">
+                        <h4 class="compare-title">NotebookLM 定位</h4>
+                        <div class="compare-list">
+                            <div class="compare-item positive">✅ AI 研究 + 自动消化 + 多模态生成</div>
+                            <div class="compare-item positive">✅ AI 能力：内置顶级 Gemini，自动摘要/播客/视频/表格</div>
+                            <div class="compare-item positive">✅ 资料处理：自动分析多源、跨文档关联、提问即答</div>
+                            <div class="compare-item positive">✅ 输出形式：播客、教学视频、infographic、slide deck</div>
+                        </div>
+                        <p class="compare-summary">资料消化前置加速器</p>
+                    </div>
+                    <div class="compare-card">
+                        <h4 class="compare-title">Notion/Obsidian/Evernote</h4>
+                        <div class="compare-list">
+                            <div class="compare-item positive">✅ 手动/半自动笔记 + 数据库 + 双向链接 + 知识图谱</div>
+                            <div class="compare-item positive">✅ 编辑/长期管理：极强（无限自定义、版本历史、本地存储）</div>
+                            <div class="compare-item positive">✅ 隐私/离线：Obsidian/Evernote 可本地/离线</div>
+                            <div class="compare-item positive">✅ 最佳场景：构建个人知识库、长期写作/项目管理</div>
+                        </div>
+                        <p class="compare-summary">长期存储 + 自定义</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 使用门槛 -->
+        <section class="get-started" id="get-started">
+            <div class="container">
+                <h2 class="section-title"><span class="emoji">🚀</span> 立即开始使用</h2>
+                <div class="get-started-box">
+                    <div class="get-started-info">
+                        <div class="info-item">
+                            <span class="info-icon">🔑</span>
+                            <div>
+                                <strong>使用门槛</strong>
+                                <p>只要有 Google 账号就能免费使用（个人免费版功能已经非常强大）</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">🔗</span>
+                            <div>
+                                <strong>官网直达</strong>
+                                <p>notebooklm.google.com - 点击下方按钮立即体验</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">⚡</span>
+                            <div>
+                                <strong>最推荐的入门玩法</strong>
+                                <p>随便找一份 20～60 页的 PDF（论文、报告、课程讲义都行）丢进去 → 点「Audio Overview」或「Video Overview」→ 听/看 8～15 分钟 → 基本就会被圈粉</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="get-started-cta">
+                        <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-large btn-yellow">
+                            前往 Google 官网试用 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. 底部 CTA -->
+        <section class="final-cta" id="final-cta">
+            <div class="container">
+                <div class="final-cta-content">
+                    <h2 class="final-cta-title">准备好体验第二大脑了吗？</h2>
+                    <p class="final-cta-desc">上传你的第一份资料，开始 AI 驱动的知识之旅</p>
+                    <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-large btn-primary">
+                        立即免费试用 →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 NotebookLM101. 基于 Google NotebookLM 官方信息整理。</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+                本站为第三方教学网站，非 Google 官方网站。所有商标归 respective owners 所有。
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
