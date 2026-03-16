@@ -3,417 +3,690 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NotebookLM101 - 全面了解 Google NotebookLM，AI 驱动的个人研究与笔记助理。支持 PDF、YouTube、录音等多种资料来源，自动生成 AI 播客、教学视频、摘要、思维导图等多模态输出。">
-    <meta name="keywords" content="NotebookLM,Google NotebookLM,AI笔记,AI助理,AI播客,Audio Overview,Video Overview,AI学习工具,文献综述,会议记录整理,学习复习,知识管理">
-    <meta name="author" content="NotebookLM101">
+    <meta name="description" content="NotebookLM 101 是一个面向知识工作者的中英双语付费资源站，聚合系统课程、Prompt 库、Notebook 案例与信息图模板，帮助用户把 NotebookLM 变成研究与产出系统。">
+    <meta name="keywords" content="NotebookLM,NotebookLM 101,AI research workflow,Prompt library,Notebook cases,Infographic templates,知识工作流,AI 研究系统">
+    <meta name="author" content="NotebookLM 101">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="NotebookLM101 - AI 驱动的第二大脑，最接近第二大脑的免费 AI 工具">
-    <meta property="og:description" content="Google NotebookLM 全攻略：AI 驱动的个人研究与笔记助理，只基于你上传的资料回答，幻觉极少，引用可追溯。支持 Audio Overview AI 播客、Video Overview 教学视频。">
+    <meta property="og:title" content="NotebookLM 101 | 把 NotebookLM 变成研究与产出系统">
+    <meta property="og:description" content="课程主线、Prompt 库、Notebook 案例与输出模板，服务产品、运营、咨询、投资、研究与写作者。">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://notebooklm.google.com">
+    <meta property="og:url" content="https://notebooklm101.com">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="NotebookLM101 - AI 驱动的第二大脑">
-    <meta name="twitter:description" content="Google 推出的 AI 笔记助理，支持 PDF、YouTube、录音等多种资料，自动生成 AI 播客和教学视频。">
-    <link rel="canonical" href="https://notebooklm.google.com">
-    <title>NotebookLM101 - Google NotebookLM 全攻略 | AI 驱动的第二大脑 | Audio Overview AI 播客 | Video Overview 教学视频</title>
+    <meta name="twitter:title" content="NotebookLM 101">
+    <meta name="twitter:description" content="Stop collecting AI tools. Start shipping reliable research workflows.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <title>NotebookLM 101 | 把 NotebookLM 变成研究与产出系统</title>
 </head>
-<body>
-    <!-- 阅读进度条 -->
+<body data-locale="zh">
     <div class="progress-bar" id="progressBar"></div>
 
-    <!-- 目录导航按钮（点击展开） -->
-    <button class="fab" id="fab" aria-label="打开目录">
-        <span class="fab-icon">☰</span>
-    </button>
+    <header class="topbar">
+        <a class="brand" href="#hero">
+            <span class="brand-mark">N101</span>
+            <span class="brand-text">NotebookLM 101</span>
+        </a>
 
-    <!-- 移动端导航抽屉 -->
-    <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-            <span>目录</span>
-            <button class="drawer-close" id="drawerClose">×</button>
+        <nav class="desktop-nav" aria-label="Primary navigation">
+            <a href="#audience">Audience</a>
+            <a href="#offer">Offer</a>
+            <a href="#preview">Preview</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="topbar-actions">
+            <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">
+                <span class="lang-chip is-active" data-set-lang="zh">ZH</span>
+                <span class="lang-chip" data-set-lang="en">EN</span>
+            </button>
+            <a class="topbar-cta" href="#pricing">
+                <span data-lang="zh">查看会员方案</span>
+                <span data-lang="en">See plans</span>
+            </a>
+            <button class="menu-button" id="menuButton" type="button" aria-label="Open menu">
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <nav class="drawer-nav" id="drawerNav"></nav>
-    </div>
-    <div class="drawer-overlay" id="drawerOverlay"></div>
+    </header>
+
+    <aside class="mobile-panel" id="mobilePanel" aria-hidden="true">
+        <div class="mobile-panel-head">
+            <strong>NotebookLM 101</strong>
+            <button class="mobile-close" id="mobileClose" type="button" aria-label="Close menu">×</button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#hero">Intro</a>
+            <a href="#audience">Audience</a>
+            <a href="#offer">Offer</a>
+            <a href="#preview">Preview</a>
+            <a href="#member-architecture">Member Area</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </aside>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 
     <main>
-        <!-- 1. Hero 区 -->
         <section class="hero" id="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">NotebookLM101</h1>
-                    <p class="hero-subtitle">目前最接近第二大脑的免费 AI 工具</p>
-                    <p class="hero-desc">
-                        Google 推出的 AI 驱动个人研究与笔记助理，几乎只基于你自己上传的资料来回答，幻觉极少，引用可追溯。
-                        特别适合论文阅读、项目研究、会议记录整理、学习复习等场景。
+            <div class="container hero-layout">
+                <div class="hero-copy">
+                    <p class="eyebrow">
+                        <span data-lang="zh">面向知识工作者的 NotebookLM 付费资源站</span>
+                        <span data-lang="en">A paid NotebookLM resource system for knowledge workers</span>
                     </p>
-                    <div class="hero-cta">
-                        <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-primary">前往试用 →</a>
-                        <a href="#quick-start" class="btn btn-secondary">快速入门</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 快速入门 -->
-        <section class="quick-start" id="quick-start">
-            <div class="container">
-                <div class="quick-start-box">
-                    <span class="quick-start-icon">⚡</span>
-                    <h2 class="quick-start-title">30秒感受到震撼</h2>
-                    <p class="quick-start-text">
-                        随便找一份 20～60 页的 PDF（论文、报告、课程讲义都行）丢进去 → 点「Audio Overview」或「Video Overview」→ 听/看 8～15 分钟 → 基本就会被圈粉 😂
+                    <h1>
+                        <span data-lang="zh">把 NotebookLM 变成研究与产出系统</span>
+                        <span data-lang="en">Turn NotebookLM into a research and output system</span>
+                    </h1>
+                    <p class="hero-lead">
+                        <span data-lang="zh">不是再看一篇工具评测，而是直接拿到可复制的课程主线、Prompt、Notebook 案例和输出模板，缩短你从“听说过”到“能稳定产出”的距离。</span>
+                        <span data-lang="en">This is not another feature explainer. It is a practical system of lessons, prompts, notebook cases, and output templates that help you ship reliable work with NotebookLM.</span>
                     </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- 3. NotebookLM 是什么 -->
-        <section class="features" id="intro">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">💡</span> NotebookLM 是什么？</h2>
-                <div class="pop-box" style="padding: 2rem; margin-bottom: 2rem;">
-                    <p style="font-size: 1.125rem; line-height: 1.8;">
-                        <strong>NotebookLM</strong> 是 Google 推出的一款 AI 驱动的个人研究与笔记助理（2026年1月最新状态）。
-                        它跟 ChatGPT、Gemini、Claude 等通用大模型最大的区别在于：<strong>NotebookLM 几乎只基于你自己上传的资料来回答和生成内容</strong>，
-                        不会随便从互联网抓取信息，因此<strong>幻觉（乱编）极少</strong>，特别适合需要高度准确、引用可追溯的场景。
-                    </p>
-                </div>
-                <div class="pop-box" style="padding: 2rem;">
-                    <p style="font-size: 1.125rem; line-height: 1.8; text-align: center; font-family: var(--font-family-mono); font-weight: 600;">
-                        「一个专属于你的、只吃你自己资料的超级研究助理，把枯燥的长文/论文/会议记录/视频，快速变成好读的摘要、好听的播客、好看的教学视频，而且引用全部可追溯。」
-                    </p>
-                </div>
-            </div>
-        </section>
+                    <div class="hero-proof">
+                        <div class="proof-card">
+                            <strong>50+</strong>
+                            <span data-lang="zh">可持续扩展的 Prompt 资产</span>
+                            <span data-lang="en">Expandable prompt assets</span>
+                        </div>
+                        <div class="proof-card">
+                            <strong>20+</strong>
+                            <span data-lang="zh">精选 Notebook 案例结构</span>
+                            <span data-lang="en">Curated notebook cases</span>
+                        </div>
+                        <div class="proof-card">
+                            <strong>12</strong>
+                            <span data-lang="zh">高频知识工作流模块</span>
+                            <span data-lang="en">High-frequency workflows</span>
+                        </div>
+                    </div>
 
-        <!-- 4. 核心功能全景 -->
-        <section class="features" id="features">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">🚀</span> 核心功能全景（2026年1月最新）</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">📚</span>
-                        <h3 class="feature-title">丰富的资料来源</h3>
-                        <p class="feature-desc">支持 PDF、Word、TXT、Google 文档/简报、网页链接、YouTube 视频（自动解析字幕）、录音文件（mp3/wav 自动转录）、图片表格。单个来源上限约50万字。</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🎙️</span>
-                        <h3 class="feature-title">AI 播客 (Audio Overview)</h3>
-                        <p class="feature-desc">把资料瞬间变成两个AI主持人聊天式的 podcast。对话极其自然有梗，支持互动模式（可随时打断提问），可自定义语气和长度。很多人说："这比自己读文档有趣太多了！"</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🎬</span>
-                        <h3 class="feature-title">AI 视频 (Video Overview)</h3>
-                        <p class="feature-desc">2026年重磅升级：自动生成有旁白+幻灯片+图表+动画的教学视频。类似 narrated slides 的视觉化讲解，支持80+种语言，适合做报告和教学。</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">📊</span>
-                        <h3 class="feature-title">多模态输出</h3>
-                        <p class="feature-desc">详细摘要、学习指南、思维导图、FAQ 问答集、时间轴、优缺点对比表、报告大纲、闪卡+测验题、完整幻灯片生成等。</p>
-                    </div>
-                </div>
-                <div class="new-features">
-                    <span class="badge">🔥 2026 新功能</span>
-                    <p>互动式播客 • 完整幻灯片生成 • 深度研究模式 • 移动 App 离线听 Audio Overview</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. 适合谁用 -->
-        <section class="users" id="users">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">👥</span> 适合谁用？（6 类用户）</h2>
-                <div class="users-grid">
-                    <div class="user-card">
-                        <span class="user-icon">👨‍🎓</span>
-                        <h3 class="user-title">学生 & 考研/考证党</h3>
-                        <p class="user-desc">期末冲刺神器<br>听播客背书超爽<br>使用量最大的群体</p>
-                    </div>
-                    <div class="user-card">
-                        <span class="user-icon">🔬</span>
-                        <h3 class="user-title">研究生 & 研究者</h3>
-                        <p class="user-desc">文献综述利器<br>精准引用来源<br>极低幻觉+超长上下文</p>
-                    </div>
-                    <div class="user-card">
-                        <span class="user-icon">💼</span>
-                        <h3 class="user-title">职场人 & 知识工作者</h3>
-                        <p class="user-desc">汇报效率核武器<br>10小时→15分钟<br>咨询/产品/运营/战略</p>
-                    </div>
-                    <div class="user-card">
-                        <span class="user-icon">🎨</span>
-                        <h3 class="user-title">内容创作者 & 讲师</h3>
-                        <p class="user-desc">快速理解复杂领域<br>Video Overview 自动生成教学视频<br>自媒体必备</p>
-                    </div>
-                    <div class="user-card">
-                        <span class="user-icon">🌍</span>
-                        <h3 class="user-title">外语资料处理者</h3>
-                        <p class="user-desc">外文论文/合同/说明书<br>中文 podcast/摘要<br>理解速度提升几倍</p>
-                    </div>
-                    <div class="user-card">
-                        <span class="user-icon">🧠</span>
-                        <h3 class="user-title">进阶 & 隐私敏感用户</h3>
-                        <p class="user-desc">第二大脑构建者<br>律师/医生/工程师/创业者<br>资料不用于训练模型</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. 谁不适合 -->
-        <section class="not-suitable" id="not-suitable">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">❌</span> 谁其实不太适合？</h2>
-                <div class="not-suitable-list">
-                    <div class="not-suitable-item">
-                        <span class="cross-icon">✕</span>
-                        <p>只想随便聊天、写小说、头脑风暴、需要实时联网最新资讯的人 → 更适合用 <strong>ChatGPT/Gemini/Claude/Perplexity</strong></p>
-                    </div>
-                    <div class="not-suitable-item">
-                        <span class="cross-icon">✕</span>
-                        <p>完全不碰「上传资料」这一步，只想用现成知识的人</p>
-                    </div>
-                    <div class="not-suitable-item">
-                        <span class="cross-icon">✕</span>
-                        <p>追求极致排版/专业设计输出的人（NotebookLM 生成的内容更偏「实用结构化」，美观度一般）</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. 用户评价 -->
-        <section class="reviews" id="reviews">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">💬</span> 用户真实评价（2026年1月）</h2>
-
-                <div class="review-section positive">
-                    <h3 class="review-section-title"><span class="check-icon">✅</span> 最常被吹爆的点（正面评价 80-90%）</h3>
-                    <div class="review-list">
-                        <div class="review-item">
-                            <p><strong>Audio Overview AI 双人播客仍然是王牌</strong> - 几乎所有人第一次用都"震惊""上头""杀疯了"。对话自然到像真人，有笑点、吐槽、抢话、呼吸声，甚至情绪起伏。把枯燥论文/财报/书/会议记录瞬间变"可听有趣的节目"。中文播客质量被夸"98%像真人""太自然了"。</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>极低幻觉 + 所有回答可追溯来源</strong> - "终于有一个AI不乱编了""引用直接跳原文高亮""汇报时底气十足"。这是它甩开 ChatGPT/Gemini/Claude 的最大优势，尤其适合论文、报告、法律/医疗/技术资料。</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>多模态输出效率爆炸</strong> - 摘要→思维导图→FAQ→时间轴→优缺点表→Video Overview（带图表讲解视频）→DataTable（自动转表格）→演示文稿/PPT风格。用户常说："以前做PPT/报告要3天，现在半小时搞定，剩下时间摸鱼"。</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>真正像"第二大脑"/个人知识助理</strong> - 适合深度学习、跨领域速成、文献综述、竞品分析、跨专业理解。很多人感慨："它不是帮你记笔记，是逼你思考""从信息搬运工升级成观点编辑"。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-section negative">
-                    <h3 class="review-section-title"><span class="warning-icon">⚠️</span> 常见的吐槽与不满</h3>
-                    <div class="review-list">
-                        <div class="review-item">
-                            <p><strong>聊天记录不持久</strong>：刷新/关页面就没了，很多人骂"笨拙""打断深度思考"</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>中文播客质量不稳定</strong>："翻译腔"严重，主持人常说"这是个非常好的观点""我完全同意你的看法"，听起来像AI译制片。过于"和谐"/复读机，信息密度低。</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>Pro版门槛</strong>：免费版每天限额（约50次聊天、3次Audio/Video生成），重度用户抓狂</p>
-                        </div>
-                        <div class="review-item">
-                            <p><strong>界面细节欠打磨</strong>：窗口大小、按钮位置、文件夹/标签管理等小功能待优化</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-quotes">
-                    <div class="quote">"NotebookLM 让我三个月没手动做笔记了"</div>
-                    <div class="quote">"职场牛马效率核武器"</div>
-                    <div class="quote">"AI 学习工具天花板，没有之一"</div>
-                    <div class="quote">"改变了人类吸收知识的方式"</div>
-                    <div class="quote">"NotebookLM 是 2026 年最被低估的生产力核弹"</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. 常见问题 -->
-        <section class="faq" id="faq">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">❓</span> 常见问题 FAQ</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span class="faq-icon">📊</span>
-                            <span class="faq-title">使用限制与配额问题</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-content">
-                            <p>免费版每天聊天查询限额约 50 次、Audio/Video Overview 生成次数每天约 3 次。一个笔记本最多 50 个来源，每个来源上限约 50 万字/200MB。超过限制需要删除旧源、开新笔记本，或升级 Pro/Plus 版。重度研究/拆书党常说："刚用上瘾就撞墙了，太抠门"。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span class="faq-icon">🎙️</span>
-                            <span class="faq-title">中文播客质量如何？</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-content">
-                            <p>2026 年已大幅优化，98% 像真人，偶有"翻译腔"。但仍存在一些问题：主持人过于"和谐"/复读机，互相高帽、重复确认，信息密度低；复杂中文指令可能有提示词漂移；语体断层，口语开场后突然切教科书式书面语。英文播客自然爆表，中文还在持续优化中。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span class="faq-icon">⚠️</span>
-                            <span class="faq-title">功能/体验小 bug 与细节问题</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-content">
-                            <p>• 聊天记录不持久：刷新/关页面就丢失<br>
-                            • 界面细节：窗口大小、按钮位置、复制时带多余编号、缺少文件夹/标签管理<br>
-                            • 生成不一致：同一资料不同时间问，答案质量天差地别（RAG检索上下文不稳）<br>
-                            • 上传失败原因：文件超200MB、PDF有拷贝保护、来源超字数、DRM保护Kindle书等</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span class="faq-icon">🔐</span>
-                            <span class="faq-title">隐私、安全与访问问题</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-content">
-                            <p>• <strong>隐私</strong>：资料不用于训练模型，Google 承诺不泄露。虽然这是 Google 的，但资料只用于你的 notebook，不像通用聊天会长期存档。<br>
-                            • <strong>年龄验证</strong>：必须18岁+年龄验证（未验证或工作/学校账户常被挡）<br>
-                            • <strong>网络访问</strong>：部分地区需科学上网，国内用户最常遇到<br>
-                            • <strong>企业账户</strong>：公司/学校账户需管理员开启额外服务</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-header">
-                            <span class="faq-icon">💡</span>
-                            <span class="faq-title">与 ChatGPT/Claude/Gemini 的区别</span>
-                            <span class="faq-arrow">▼</span>
-                        </div>
-                        <div class="faq-content">
-                            <p><strong>核心区别</strong>：NotebookLM 是"专吃你自己资料的超精准研究助理 + 多模态输出工厂"，它几乎不联网、不乱编、一切回答都强制可追溯来源。<br><br>
-                            <strong>想"随便聊、要最新资讯、写小说、脑暴"</strong> → 用 ChatGPT/Claude/Gemini/Perplexity<br>
-                            <strong>想"啃大块复杂自家资料、追求零幻觉 + 可追溯 + 神奇多模态输出（播客/视频/幻灯片）"</strong> → NotebookLM 目前无敌<br><br>
-                            <strong>2026 年最强组合（社区共识）</strong>：NotebookLM（消化+生成） + Obsidian/Notion（长期存储+自定义） + Gemini/ChatGPT（创意/联网补充）</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 9. 竞品对比 -->
-        <section class="compare" id="compare">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">🆚</span> NotebookLM vs 其他工具</h2>
-
-                <h3 style="text-align: center; font-family: var(--font-family-heading); font-size: 1.75rem; margin: 2rem 0; text-transform: uppercase;">vs 通用大模型 AI</h3>
-                <div class="compare-grid">
-                    <div class="compare-card">
-                        <h4 class="compare-title">NotebookLM 优势</h4>
-                        <div class="compare-list">
-                            <div class="compare-item positive">✅ 知识来源：只用你上传的资料，强制 grounding</div>
-                            <div class="compare-item positive">✅ 幻觉率：极低（几乎为0），所有回答可点击跳原文</div>
-                            <div class="compare-item positive">✅ 隐私：资料不用于训练，承诺不泄露</div>
-                            <div class="compare-item positive">✅ 独特输出：Audio Overview、Video Overview、Slide Deck、Data Table</div>
-                            <div class="compare-item positive">✅ 免费度：个人版完全免费（限额），Pro 很便宜</div>
-                        </div>
-                    </div>
-                    <div class="compare-card">
-                        <h4 class="compare-title">ChatGPT/Claude/Gemini 优势</h4>
-                        <div class="compare-list">
-                            <div class="compare-item positive">✅ 实时联网/最新资讯（Perplexity 最强）</div>
-                            <div class="compare-item positive">✅ 创意写作、代码生成、头脑风暴更强</div>
-                            <div class="compare-item positive">✅ 对话体验更自然、更智能</div>
-                            <div class="compare-item positive">✅ 通用场景更广</div>
-                        </div>
-                        <p class="compare-summary" style="margin-top: 1rem;">两者互补使用最强！</p>
-                    </div>
-                </div>
-
-                <h3 style="text-align: center; font-family: var(--font-family-heading); font-size: 1.75rem; margin: 3rem 0 2rem; text-transform: uppercase;">vs 传统笔记工具</h3>
-                <div class="compare-grid">
-                    <div class="compare-card">
-                        <h4 class="compare-title">NotebookLM 定位</h4>
-                        <div class="compare-list">
-                            <div class="compare-item positive">✅ AI 研究 + 自动消化 + 多模态生成</div>
-                            <div class="compare-item positive">✅ AI 能力：内置顶级 Gemini，自动摘要/播客/视频/表格</div>
-                            <div class="compare-item positive">✅ 资料处理：自动分析多源、跨文档关联、提问即答</div>
-                            <div class="compare-item positive">✅ 输出形式：播客、教学视频、infographic、slide deck</div>
-                        </div>
-                        <p class="compare-summary">资料消化前置加速器</p>
-                    </div>
-                    <div class="compare-card">
-                        <h4 class="compare-title">Notion/Obsidian/Evernote</h4>
-                        <div class="compare-list">
-                            <div class="compare-item positive">✅ 手动/半自动笔记 + 数据库 + 双向链接 + 知识图谱</div>
-                            <div class="compare-item positive">✅ 编辑/长期管理：极强（无限自定义、版本历史、本地存储）</div>
-                            <div class="compare-item positive">✅ 隐私/离线：Obsidian/Evernote 可本地/离线</div>
-                            <div class="compare-item positive">✅ 最佳场景：构建个人知识库、长期写作/项目管理</div>
-                        </div>
-                        <p class="compare-summary">长期存储 + 自定义</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 10. 使用门槛 -->
-        <section class="get-started" id="get-started">
-            <div class="container">
-                <h2 class="section-title"><span class="emoji">🚀</span> 立即开始使用</h2>
-                <div class="get-started-box">
-                    <div class="get-started-info">
-                        <div class="info-item">
-                            <span class="info-icon">🔑</span>
-                            <div>
-                                <strong>使用门槛</strong>
-                                <p>只要有 Google 账号就能免费使用（个人免费版功能已经非常强大）</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-icon">🔗</span>
-                            <div>
-                                <strong>官网直达</strong>
-                                <p>notebooklm.google.com - 点击下方按钮立即体验</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-icon">⚡</span>
-                            <div>
-                                <strong>最推荐的入门玩法</strong>
-                                <p>随便找一份 20～60 页的 PDF（论文、报告、课程讲义都行）丢进去 → 点「Audio Overview」或「Video Overview」→ 听/看 8～15 分钟 → 基本就会被圈粉</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="get-started-cta">
-                        <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-large btn-yellow">
-                            前往 Google 官网试用 →
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#pricing">
+                            <span data-lang="zh">查看会员方案</span>
+                            <span data-lang="en">View membership</span>
+                        </a>
+                        <a class="button button-secondary" href="#preview">
+                            <span data-lang="zh">进入资源预览</span>
+                            <span data-lang="en">Explore preview</span>
                         </a>
                     </div>
                 </div>
+
+                <div class="hero-board">
+                    <div class="board board-primary">
+                        <div class="board-label">Research OS</div>
+                        <h2>
+                            <span data-lang="zh">少走弯路，直接获得可复制的知识工作流</span>
+                            <span data-lang="en">Stop guessing. Start with reusable workflows.</span>
+                        </h2>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">课程主线：7 天最小上手路径</span>
+                                <span data-lang="en">Curriculum: 7-day start path</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">Prompt 库：研究、汇报、写作、复盘</span>
+                                <span data-lang="en">Prompt library: research, briefs, writing, reviews</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">案例库：真实 Notebook 输入与输出结构</span>
+                                <span data-lang="en">Case library: input-to-output notebook structures</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="board board-secondary">
+                        <div class="result-window">
+                            <div class="window-head">
+                                <span>briefing.md</span>
+                                <span>timeline.json</span>
+                                <span>deck-outline.txt</span>
+                            </div>
+                            <div class="window-body">
+                                <div class="result-line accent">INPUT: reports + calls + links</div>
+                                <div class="result-line">OUTPUT 1: executive research brief</div>
+                                <div class="result-line">OUTPUT 2: source-backed timeline</div>
+                                <div class="result-line">OUTPUT 3: deck storyline draft</div>
+                                <div class="result-line muted">SYSTEM: lesson + prompt + case + template</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 11. 底部 CTA -->
-        <section class="final-cta" id="final-cta">
+        <section class="signal-strip" aria-label="Brand promise">
+            <div class="container signal-grid">
+                <div>
+                    <span class="signal-kicker">Positioning</span>
+                    <p>
+                        <span data-lang="zh">不是教你点哪里，而是教你如何组织资料、问对问题、产出高价值结果。</span>
+                        <span data-lang="en">Not where to click. How to structure sources, ask better questions, and produce high-value outputs.</span>
+                    </p>
+                </div>
+                <div>
+                    <span class="signal-kicker">For</span>
+                    <p>
+                        <span data-lang="zh">产品、运营、咨询、投资、研究、写作者</span>
+                        <span data-lang="en">Product, ops, consulting, investing, research, and writing</span>
+                    </p>
+                </div>
+                <div>
+                    <span class="signal-kicker">Format</span>
+                    <p>
+                        <span data-lang="zh">公开首页 + 会员资源库 + 每周更新</span>
+                        <span data-lang="en">Public landing page + member vault + weekly updates</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="audience">
             <div class="container">
-                <div class="final-cta-content">
-                    <h2 class="final-cta-title">准备好体验第二大脑了吗？</h2>
-                    <p class="final-cta-desc">上传你的第一份资料，开始 AI 驱动的知识之旅</p>
-                    <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="btn btn-large btn-primary">
-                        立即免费试用 →
+                <div class="section-header">
+                    <p class="eyebrow">Audience</p>
+                    <h2>
+                        <span data-lang="zh">这不是给“泛 AI 围观者”的，是给需要稳定产出的知识工作者</span>
+                        <span data-lang="en">Built for people who need reliable outputs, not casual AI tourists</span>
+                    </h2>
+                </div>
+
+                <div class="audience-grid">
+                    <article class="audience-card">
+                        <span class="audience-index">01</span>
+                        <h3>
+                            <span data-lang="zh">产品与运营</span>
+                            <span data-lang="en">Product and Ops</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">把需求文档、访谈纪要、竞品资料压缩成 briefing、比较表和下一步行动。</span>
+                            <span data-lang="en">Compress specs, interviews, and competitor material into briefs, comparison tables, and next actions.</span>
+                        </p>
+                    </article>
+                    <article class="audience-card">
+                        <span class="audience-index">02</span>
+                        <h3>
+                            <span data-lang="zh">咨询与投资</span>
+                            <span data-lang="en">Consulting and Investing</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">从报告、财报、电话会和访谈中快速生成结构化洞察，减少手工整理时间。</span>
+                            <span data-lang="en">Pull structured insights from reports, earnings, calls, and interviews with less manual synthesis.</span>
+                        </p>
+                    </article>
+                    <article class="audience-card">
+                        <span class="audience-index">03</span>
+                        <h3>
+                            <span data-lang="zh">研究与写作者</span>
+                            <span data-lang="en">Researchers and Writers</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">围绕引用、证据链和观点组织，把碎片资料变成可发布的大纲与正文。</span>
+                            <span data-lang="en">Organize citations, evidence chains, and arguments into publishable outlines and drafts.</span>
+                        </p>
+                    </article>
+                    <article class="audience-card">
+                        <span class="audience-index">04</span>
+                        <h3>
+                            <span data-lang="zh">内容创作者</span>
+                            <span data-lang="en">Content creators</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">把 NotebookLM 的摘要、时间线、信息图和演示稿能力，接到自己的内容生产流水线上。</span>
+                            <span data-lang="en">Connect summaries, timelines, infographics, and deck outputs into a repeatable content pipeline.</span>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section surface-dark" id="offer">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Offer</p>
+                    <h2>
+                        <span data-lang="zh">第一版卖的不是“大而全课程”，而是课程骨架 + 强资源库</span>
+                        <span data-lang="en">Version one sells a structured system, not a bloated course</span>
+                    </h2>
+                </div>
+
+                <div class="offer-grid">
+                    <article class="offer-card">
+                        <span class="offer-tag">Start Here</span>
+                        <h3>
+                            <span data-lang="zh">7 天最小上手路径</span>
+                            <span data-lang="en">7-day minimum viable onboarding</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">从资料组织、Source Engineering 到第一个高质量输出，建立共同语境。</span>
+                            <span data-lang="en">Move from source organization and source engineering to your first high-quality output.</span>
+                        </p>
+                    </article>
+                    <article class="offer-card">
+                        <span class="offer-tag">Workflow Library</span>
+                        <h3>
+                            <span data-lang="zh">12 个高频知识工作流</span>
+                            <span data-lang="en">12 high-frequency workflows</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">研究 briefing、竞品拆解、会议复盘、内容策划、演示大纲、冲突对齐等。</span>
+                            <span data-lang="en">Research briefs, competitor teardowns, meeting reviews, content planning, deck outlines, conflict mapping.</span>
+                        </p>
+                    </article>
+                    <article class="offer-card">
+                        <span class="offer-tag">Resource Vault</span>
+                        <h3>
+                            <span data-lang="zh">Prompt + Notebook + 模板联动</span>
+                            <span data-lang="en">Prompts, notebooks, and templates linked together</span>
+                        </h3>
+                        <p>
+                            <span data-lang="zh">每个 Lesson 至少关联 Prompt 和案例，避免内容孤岛。</span>
+                            <span data-lang="en">Every lesson connects to prompts and cases so members do not navigate isolated content.</span>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="before-after">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Before / After</p>
+                    <h2>
+                        <span data-lang="zh">从“我知道这个工具”切换到“我能稳定交付结果”</span>
+                        <span data-lang="en">From knowing the tool to consistently shipping results</span>
+                    </h2>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card comparison-card-before">
+                        <span class="comparison-label">
+                            <span data-lang="zh">Before</span>
+                            <span data-lang="en">Before</span>
+                        </span>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">上传一堆资料，问几个泛问题，得到泛泛答案</span>
+                                <span data-lang="en">Upload scattered files, ask generic questions, get generic answers</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">不知道哪些 Prompt 有用，结果不可复用</span>
+                                <span data-lang="en">No reusable prompt structure, no reliable reuse</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">做完一次任务，下次还得从头再来</span>
+                                <span data-lang="en">Every new task starts from scratch</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card comparison-card-after">
+                        <span class="comparison-label">
+                            <span data-lang="zh">After</span>
+                            <span data-lang="en">After</span>
+                        </span>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">按任务选工作流，再进入对应 Lesson、Prompt、案例和模板</span>
+                                <span data-lang="en">Pick a workflow by task, then jump into lessons, prompts, cases, and templates</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">把资料组织、提问方式和输出格式固定下来</span>
+                                <span data-lang="en">Standardize source setup, questioning, and output formats</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">复用同一套系统做 briefing、timeline、deck、FAQ</span>
+                                <span data-lang="en">Reuse one system to produce briefs, timelines, decks, and FAQs</span>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="preview">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Preview</p>
+                    <h2>
+                        <span data-lang="zh">公开区只展示够你判断价值的样本</span>
+                        <span data-lang="en">The public layer shows enough proof to justify the membership</span>
+                    </h2>
+                </div>
+
+                <div class="preview-columns">
+                    <div class="preview-block">
+                        <div class="preview-head">
+                            <h3>Prompt Preview</h3>
+                            <span>3 samples</span>
+                        </div>
+                        <div class="preview-list">
+                            <article class="preview-item">
+                                <h4>
+                                    <span data-lang="zh">研究 Briefing Prompt</span>
+                                    <span data-lang="en">Research briefing prompt</span>
+                                </h4>
+                                <p>
+                                    <span data-lang="zh">把报告、会议纪要与链接整理成一页 briefing，附证据出处与行动建议。</span>
+                                    <span data-lang="en">Turn reports, calls, and links into a one-page brief with evidence references and actions.</span>
+                                </p>
+                            </article>
+                            <article class="preview-item">
+                                <h4>
+                                    <span data-lang="zh">冲突映射 Prompt</span>
+                                    <span data-lang="en">Conflict mapping prompt</span>
+                                </h4>
+                                <p>
+                                    <span data-lang="zh">识别资料中的矛盾、盲区和需要进一步验证的断点。</span>
+                                    <span data-lang="en">Map contradictions, blind spots, and claims that need further verification.</span>
+                                </p>
+                            </article>
+                            <article class="preview-item">
+                                <h4>
+                                    <span data-lang="zh">Deck Storyline Prompt</span>
+                                    <span data-lang="en">Deck storyline prompt</span>
+                                </h4>
+                                <p>
+                                    <span data-lang="zh">把长资料压缩成适合汇报的 8 页演示逻辑骨架。</span>
+                                    <span data-lang="en">Compress long research material into an 8-slide presentation storyline.</span>
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="preview-block">
+                        <div class="preview-head">
+                            <h3>Notebook Cases</h3>
+                            <span>3 samples</span>
+                        </div>
+                        <div class="preview-list">
+                            <article class="preview-item">
+                                <h4>Global Top 50 Q1 Earnings</h4>
+                                <p>
+                                    <span data-lang="zh">财报和专家分析输入，输出行业对比视角与高管汇报结构。</span>
+                                    <span data-lang="en">Earnings reports plus analyst material transformed into executive-level comparison outputs.</span>
+                                </p>
+                            </article>
+                            <article class="preview-item">
+                                <h4>How to Build A Life</h4>
+                                <p>
+                                    <span data-lang="zh">专栏文章集合，输出主题脉络、核心概念与可行动建议。</span>
+                                    <span data-lang="en">Column archives reorganized into themes, concepts, and practical next steps.</span>
+                                </p>
+                            </article>
+                            <article class="preview-item">
+                                <h4>AI 编程趋势与工程实战观察</h4>
+                                <p>
+                                    <span data-lang="zh">技术资料与观点输入，输出结构化观察与对外表达框架。</span>
+                                    <span data-lang="en">Technical sources and commentary shaped into structured observations and communication angles.</span>
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="preview-block">
+                        <div class="preview-head">
+                            <h3>Output Templates</h3>
+                            <span>2 open styles</span>
+                        </div>
+                        <div class="template-showcase">
+                            <div class="template-card template-card-signal">
+                                <span class="template-badge">Infographic</span>
+                                <strong>
+                                    <span data-lang="zh">Neo-Constructivist Collage</span>
+                                    <span data-lang="en">Neo-Constructivist Collage</span>
+                                </strong>
+                                <p>
+                                    <span data-lang="zh">适合做认知框架、策略图谱、结构化观点展示。</span>
+                                    <span data-lang="en">Good for frameworks, strategy maps, and structured visual arguments.</span>
+                                </p>
+                            </div>
+                            <div class="template-card template-card-grid">
+                                <span class="template-badge">Slide Deck</span>
+                                <strong>
+                                    <span data-lang="zh">现代编辑风演示稿</span>
+                                    <span data-lang="en">Modern editorial slide system</span>
+                                </strong>
+                                <p>
+                                    <span data-lang="zh">适合汇报、提案和案例解构，不靠花哨效果，只强化说服顺序。</span>
+                                    <span data-lang="en">A persuasive, low-noise structure for proposals, reports, and case explanations.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section surface-contrast" id="member-architecture">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Member Area</p>
+                    <h2>
+                        <span data-lang="zh">会员区按“任务目标”组织，而不是按功能按钮组织</span>
+                        <span data-lang="en">The member area is organized by jobs-to-be-done, not feature buttons</span>
+                    </h2>
+                </div>
+
+                <div class="member-grid">
+                    <article class="member-card">
+                        <h3>Start Here</h3>
+                        <p>
+                            <span data-lang="zh">7 天最小上手路径，统一成员对 Source Engineering、引用和输出标准的理解。</span>
+                            <span data-lang="en">A 7-day onboarding path that aligns members on source engineering, citations, and output quality.</span>
+                        </p>
+                    </article>
+                    <article class="member-card">
+                        <h3>Workflows</h3>
+                        <p>
+                            <span data-lang="zh">按研究、汇报、写作、复盘、内容策划等任务切入。</span>
+                            <span data-lang="en">Entry points by research, reporting, writing, reviews, and content planning.</span>
+                        </p>
+                    </article>
+                    <article class="member-card">
+                        <h3>Prompt Library</h3>
+                        <p>
+                            <span data-lang="zh">每条 Prompt 标注适用人群、输出类型、难度和是否公开预览。</span>
+                            <span data-lang="en">Each prompt is labeled by audience, output type, difficulty, and preview status.</span>
+                        </p>
+                    </article>
+                    <article class="member-card">
+                        <h3>Notebook Cases</h3>
+                        <p>
+                            <span data-lang="zh">展示输入资料类型、案例目的、行业和最终产出类型。</span>
+                            <span data-lang="en">Cases reveal source types, goals, industries, and final output categories.</span>
+                        </p>
+                    </article>
+                    <article class="member-card">
+                        <h3>Output Templates</h3>
+                        <p>
+                            <span data-lang="zh">信息图、FAQ、Timeline、Deck 大纲等模板统一沉淀。</span>
+                            <span data-lang="en">Templates for infographics, FAQs, timelines, and deck outlines live in one system.</span>
+                        </p>
+                    </article>
+                    <article class="member-card">
+                        <h3>Updates</h3>
+                        <p>
+                            <span data-lang="zh">每周新增案例、Prompt 和模板，强调持续更新带来的续费价值。</span>
+                            <span data-lang="en">Weekly updates keep the library alive and justify recurring membership value.</span>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">Pricing</p>
+                    <h2>
+                        <span data-lang="zh">低决策门槛起步，先验证资源库的持续价值</span>
+                        <span data-lang="en">Start with low-friction pricing and validate the compounding value of the vault</span>
+                    </h2>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="pricing-card">
+                        <span class="pricing-tier">Free</span>
+                        <h3>
+                            <span data-lang="zh">公开预览</span>
+                            <span data-lang="en">Public preview</span>
+                        </h3>
+                        <p class="pricing-price">$0</p>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">公开首页</span>
+                                <span data-lang="en">Public landing page</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">少量 Prompt / 案例 / 模板预览</span>
+                                <span data-lang="en">Selected prompt, case, and template previews</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">用于解释价值和引导升级</span>
+                                <span data-lang="en">Designed to prove value and trigger upgrade</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="pricing-card pricing-card-featured">
+                        <span class="pricing-tier">Pro Member</span>
+                        <h3>
+                            <span data-lang="zh">主推会员</span>
+                            <span data-lang="en">Core membership</span>
+                        </h3>
+                        <p class="pricing-price">$79<span>/year</span></p>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">完整课程主线</span>
+                                <span data-lang="en">Full lesson path</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">全量 Prompt 库、Notebook 案例库、模板库</span>
+                                <span data-lang="en">Full prompts, notebook cases, and template vault</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">每周新增内容</span>
+                                <span data-lang="en">Weekly additions</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="pricing-card">
+                        <span class="pricing-tier">Founding Member</span>
+                        <h3>
+                            <span data-lang="zh">创始会员</span>
+                            <span data-lang="en">Founding member</span>
+                        </h3>
+                        <p class="pricing-price">$149<span>/one-time</span></p>
+                        <ul>
+                            <li>
+                                <span data-lang="zh">包含 Pro 全部权益</span>
+                                <span data-lang="en">Includes all Pro access</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">永久价格锁定</span>
+                                <span data-lang="en">Permanent price lock</span>
+                            </li>
+                            <li>
+                                <span data-lang="zh">早期共创反馈通道</span>
+                                <span data-lang="en">Early feedback loop</span>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="pricing-actions">
+                    <a class="button button-primary" href="https://www.notion.so/2c05327fa74e80d88c2fdd479ffcc4b8" target="_blank" rel="noopener">
+                        <span data-lang="zh">进入 Notion 内容中枢</span>
+                        <span data-lang="en">Open Notion hub</span>
+                    </a>
+                    <a class="button button-secondary" href="mailto:hello@notebooklm101.com">
+                        <span data-lang="zh">申请内测 / 合作</span>
+                        <span data-lang="en">Request beta / partner</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container faq-layout">
+                <div class="section-header">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>
+                        <span data-lang="zh">首页的职责是转化，不是解释所有细节</span>
+                        <span data-lang="en">The homepage is for conversion, not for documenting every feature</span>
+                    </h2>
+                </div>
+
+                <div class="faq-list">
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <span data-lang="zh">这个站点和“NotebookLM 教程文章”有什么区别？</span>
+                            <span data-lang="en">How is this different from a NotebookLM tutorial blog?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                <span data-lang="zh">教程文章通常解释功能；NotebookLM 101 提供的是可复用工作流、Prompt、案例和输出模板，目标是帮助你稳定交付结果。</span>
+                                <span data-lang="en">Tutorials explain features. NotebookLM 101 packages reusable workflows, prompts, cases, and templates so you can repeatedly deliver outputs.</span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <span data-lang="zh">为什么做成“课程 + 资源库”的混合模式？</span>
+                            <span data-lang="en">Why combine lessons and a resource vault?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                <span data-lang="zh">纯课程容易一次性消费，纯资源库容易缺少路径。混合模式既能提供学习骨架，也能形成持续更新价值。</span>
+                                <span data-lang="en">A pure course gets consumed once. A pure vault lacks guidance. The hybrid model provides both direction and compounding value.</span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <span data-lang="zh">双语会不会让站点显得混乱？</span>
+                            <span data-lang="en">Will bilingual content make the site messy?</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                <span data-lang="zh">不会。首页通过语言切换共享同一套定位，先保证中文主创一致性，再同步英文表达。</span>
+                                <span data-lang="en">No. The same positioning is shared through a language toggle. Chinese remains the primary authoring language, with selected English sync.</span>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-band" id="cta">
+            <div class="container cta-band-layout">
+                <div>
+                    <p class="eyebrow">NotebookLM 101</p>
+                    <h2>
+                        <span data-lang="zh">从现在开始，不再零散收藏 AI 技巧，而是建立自己的研究工作流</span>
+                        <span data-lang="en">Stop collecting AI hacks. Build a system that compounds.</span>
+                    </h2>
+                </div>
+                <div class="cta-band-actions">
+                    <a class="button button-primary" href="#pricing">
+                        <span data-lang="zh">查看会员方案</span>
+                        <span data-lang="en">See pricing</span>
+                    </a>
+                    <a class="button button-secondary" href="#offer">
+                        <span data-lang="zh">回看产品结构</span>
+                        <span data-lang="en">Review product structure</span>
                     </a>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 NotebookLM101. 基于 Google NotebookLM 官方信息整理。</p>
-            <p style="margin-top: 0.5rem; font-size: 0.75rem;">
-                本站为第三方教学网站，非 Google 官方网站。所有商标归 respective owners 所有。
-            </p>
-        </div>
-    </footer>
 
     <script src="js/main.js"></script>
 </body>
